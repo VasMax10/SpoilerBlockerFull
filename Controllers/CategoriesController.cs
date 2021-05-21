@@ -45,6 +45,14 @@ namespace SpoilerBlockerFull.Controllers
                 return NotFound();
             }
 
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var test = _context.SpoilerCategories.Where(c => ((c.Id == category.Id) && (c.UserId != userId))).Count();
+            if (test > 0)
+            {
+                return NotFound();
+            }
+
             return View(category);
         }
 
@@ -82,6 +90,12 @@ namespace SpoilerBlockerFull.Controllers
 
             var category = await _context.SpoilerCategories.FindAsync(id);
             if (category == null)
+            {
+                return NotFound();
+            }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var test = _context.SpoilerCategories.Where(c => ((c.Id == category.Id) && (c.UserId != userId))).Count();
+            if (test > 0)
             {
                 return NotFound();
             }
@@ -134,6 +148,12 @@ namespace SpoilerBlockerFull.Controllers
             var category = await _context.SpoilerCategories
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
+            {
+                return NotFound();
+            }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var test = _context.SpoilerCategories.Where(c => ((c.Id == category.Id) && (c.UserId != userId))).Count();
+            if (test > 0)
             {
                 return NotFound();
             }
