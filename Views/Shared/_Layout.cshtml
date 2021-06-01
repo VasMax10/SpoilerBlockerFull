@@ -6,12 +6,43 @@
     <title>@ViewData["Title"] - SpoilerBlockerFull</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style media="screen">
+        body {
+            background-image: url(/images/background.jpg);
+            height: 100%;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .custom-combobox {
+            position: relative;
+            display: inline-block;
+        }
+
+        .custom-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+        }
+
+        .custom-combobox-input {
+            margin: 0;
+            padding: 5px 10px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SpoilerBlockerFull</a>
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">SpoilerBlockerFull</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,33 +51,265 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Category</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Index">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <!--<li>
+                            <div class="ui-widget">
+                                <label>Language: </label>
+                                <select id="combobox">
+                                    <option value="ak">Akan</option>
+                                    <option value="an">Aragonese</option>
+                                    <option value="cr">Cree</option>
+                                    <option value="az">Azerbaijani/Azərbaycan</option>
+                                    <option value="cs">Czech/Český</option>
+                                    <option value="aa">Afar</option>
+                                    <option value="br">Breton</option>
+                                    <option value="af">Afrikaans/Afrikaans</option>
+                                    <option value="bo">Tibetan</option>
+                                    <option value="ce">Chechen</option>
+                                    <option value="kw">Cornish</option>
+                                    <option value="fo">Faroese</option>
+                                    <option value="la">Latin/Latin</option>
+                                    <option value="ng">Ndonga</option>
+                                    <option value="sc">Sardinian</option>
+                                    <option value="ti">Tigrinya</option>
+                                    <option value="tn">Tswana</option>
+                                    <option value="tr">Turkish/Türkçe</option>
+                                    <option value="pa">Punjabi/ਪੰਜਾਬੀ</option>
+                                    <option value="et">Estonian/Eesti</option>
+                                    <option value="fr">French/Français</option>
+                                    <option value="ha">Hausa/Hausa</option>
+                                    <option value="is">Icelandic/Íslenska</option>
+                                    <option value="li">Limburgish</option>
+                                    <option value="ln">Lingala</option>
+                                    <option value="ss">Swati</option>
+                                    <option value="ab">Abkhazian</option>
+                                    <option value="sh">Serbo-Croatian</option>
+                                    <option value="eu">Basque/euskera</option>
+                                    <option value="fy">Frisian</option>
+                                    <option value="ja">Japanese/日本語</option>
+                                    <option value="oj">Ojibwa</option>
+                                    <option value="or">Oriya</option>
+                                    <option value="pi">Pali</option>
+                                    <option value="su">Sundanese</option>
+                                    <option value="th">Thai/ภาษาไทย</option>
+                                    <option value="ig">Igbo</option>
+                                    <option value="id">Indonesian/Bahasa indonesia</option>
+                                    <option value="kk">Kazakh/қазақ</option>
+                                    <option value="ki">Kikuyu</option>
+                                    <option value="ug">Uighur</option>
+                                    <option value="ve">Venda</option>
+                                    <option value="rw">Kinyarwanda/Kinyarwanda</option>
+                                    <option value="mi">Maori</option>
+                                    <option value="nv">Navajo</option>
+                                    <option value="hi">Hindi/हिन्दी</option>
+                                    <option value="pt">Portuguese/Português</option>
+                                    <option value="sg">Sango</option>
+                                    <option value="sk">Slovak/Slovenčina</option>
+                                    <option value="sr">Serbian/Srpski</option>
+                                    <option value="ty">Tahitian</option>
+                                    <option value="xh">Xhosa</option>
+                                    <option value="ar">Arabic/العربية</option>
+                                    <option value="co">Corsican</option>
+                                    <option value="bi">Bislama</option>
+                                    <option value="eo">Esperanto/Esperanto</option>
+                                    <option value="hz">Herero</option>
+                                    <option value="fi">Finnish/suomi</option>
+                                    <option value="iu">Inuktitut</option>
+                                    <option value="lv">Latvian/Latviešu</option>
+                                    <option value="it">Italian/Italiano</option>
+                                    <option value="nl">Dutch/Nederlands</option>
+                                    <option value="kn">Kannada/?????</option>
+                                    <option value="sa">Sanskrit</option>
+                                    <option value="sq">Albanian/shqip</option>
+                                    <option value="tl">Tagalog</option>
+                                    <option value="lb">Letzeburgesch</option>
+                                    <option value="ts">Tsonga</option>
+                                    <option value="ml">Malayalam</option>
+                                    <option value="vo">Volapük</option>
+                                    <option value="zu">Zulu/isiZulu</option>
+                                    <option value="os">Ossetian; Ossetic</option>
+                                    <option value="sm">Samoan</option>
+                                    <option value="za">Zhuang</option>
+                                    <option value="bn">Bengali/বাংলা</option>
+                                    <option value="cu">Slavic</option>
+                                    <option value="ga">Irish/Gaeilge</option>
+                                    <option value="gv">Manx</option>
+                                    <option value="hu">Hungarian/Magyar</option>
+                                    <option value="jv">Javanese</option>
+                                    <option value="kr">Kanuri</option>
+                                    <option value="km">Khmer</option>
+                                    <option value="ky">Kirghiz/??????</option>
+                                    <option value="na">Nauru</option>
+                                    <option value="nr">Ndebele</option>
+                                    <option value="oc">Occitan</option>
+                                    <option value="ro">Romanian/Română</option>
+                                    <option value="ru">Russian/Pусский</option>
+                                    <option value="hy">Armenian</option>
+                                    <option value="ch">Chamorro/Finu' Chamorro</option>
+                                    <option value="xx">No Language/No Language</option>
+                                    <option value="ba">Bashkir</option>
+                                    <option value="gl">Galician/Galego</option>
+                                    <option value="io">Ido</option>
+                                    <option value="lu">Luba-Katanga</option>
+                                    <option value="mh">Marshall</option>
+                                    <option value="mg">Malagasy</option>
+                                    <option value="mo">Moldavian</option>
+                                    <option value="mn">Mongolian</option>
+                                    <option value="nd">Ndebele</option>
+                                    <option value="no">Norwegian/Norsk</option>
+                                    <option value="pl">Polish/Polski</option>
+                                    <option value="sw">Swahili/Kiswahili</option>
+                                    <option value="tg">Tajik</option>
+                                    <option value="to">Tonga</option>
+                                    <option value="wa">Walloon</option>
+                                    <option value="yi">Yiddish</option>
+                                    <option value="en">English/English</option>
+                                    <option value="as">Assamese</option>
+                                    <option value="gd">Gaelic</option>
+                                    <option value="kl">Kalaallisut</option>
+                                    <option value="my">Burmese</option>
+                                    <option value="qu">Quechua</option>
+                                    <option value="sn">Shona</option>
+                                    <option value="uk">Ukrainian/Український</option>
+                                    <option value="fa">Persian/فارسی</option>
+                                    <option value="ka">Georgian/ქართული</option>
+                                    <option value="gu">Gujarati</option>
+                                    <option value="av">Avaric</option>
+                                    <option value="ae">Avestan</option>
+                                    <option value="gn">Guarani</option>
+                                    <option value="mt">Maltese/Malti</option>
+                                    <option value="ne">Nepali</option>
+                                    <option value="sv">Swedish/svenska</option>
+                                    <option value="tt">Tatar</option>
+                                    <option value="wo">Wolof/Wolof</option>
+                                    <option value="cn">Cantonese/广州话 / 廣州話</option>
+                                    <option value="cv">Chuvash</option>
+                                    <option value="da">Danish/Dansk</option>
+                                    <option value="dz">Dzongkha</option>
+                                    <option value="ny">Chichewa; Nyanja</option>
+                                    <option value="rn">Rundi/Kirundi</option>
+                                    <option value="st">Sotho</option>
+                                    <option value="tk">Turkmen</option>
+                                    <option value="uz">Uzbek/ozbek</option>
+                                    <option value="vi">Vietnamese/Tiếng Việt</option>
+                                    <option value="el">Greek/ελληνικά</option>
+                                    <option value="ca">Catalan/Català</option>
+                                    <option value="cy">Welsh/Cymraeg</option>
+                                    <option value="de">German/Deutsch</option>
+                                    <option value="ks">Kashmiri</option>
+                                    <option value="ms">Malay/Bahasa melayu</option>
+                                    <option value="nb">Norwegian Bokmål/Bokmål</option>
+                                    <option value="rm">Raeto-Romance</option>
+                                    <option value="si">Sinhalese/සිංහල</option>
+                                    <option value="es">Spanish/Español</option>
+                                    <option value="te">Telugu/తెలుగు</option>
+                                    <option value="tw">Twi</option>
+                                    <option value="ps">Pushto/پښتو</option>
+                                    <option value="bg">Bulgarian/български език</option>
+                                    <option value="mk">Macedonian</option>
+                                    <option value="ik">Inupiaq</option>
+                                    <option value="ko">Korean/한국어/조선말</option>
+                                    <option value="lt">Lithuanian/Lietuvių</option>
+                                    <option value="om">Oromo</option>
+                                    <option value="se">Northern Sami</option>
+                                    <option value="so">Somali/Somali</option>
+                                    <option value="ta">Tamil/தமிழ்</option>
+                                    <option value="ur">Urdu/اردو</option>
+                                    <option value="am">Amharic</option>
+                                    <option value="bs">Bosnian/Bosanski</option>
+                                    <option value="dv">Divehi</option>
+                                    <option value="ay">Aymara</option>
+                                    <option value="bm">Bambara/Bamanankan</option>
+                                    <option value="ii">Yi</option>
+                                    <option value="ie">Interlingue</option>
+                                    <option value="kv">Komi</option>
+                                    <option value="ku">Kurdish</option>
+                                    <option value="nn">Norwegian Nynorsk</option>
+                                    <option value="zh">Mandarin/普通话</option>
+                                    <option value="he">Hebrew/עִבְרִית</option>
+                                    <option value="ee">Ewe/Èʋegbe</option>
+                                    <option value="fj">Fijian</option>
+                                    <option value="ff">Fulah/Fulfulde</option>
+                                    <option value="ht">Haitian; Haitian Creole</option>
+                                    <option value="hr">Croatian/Hrvatski</option>
+                                    <option value="ia">Interlingua</option>
+                                    <option value="kj">Kuanyama</option>
+                                    <option value="lo">Lao</option>
+                                    <option value="lg">Ganda</option>
+                                    <option value="mr">Marathi</option>
+                                    <option value="sd">Sindhi</option>
+                                    <option value="be">Belarusian/беларуская мова</option>
+                                    <option value="ho">Hiri Motu</option>
+                                    <option value="kg">Kongo</option>
+                                    <option value="sl">Slovenian/Slovenščina</option>
+                                    <option value="yo">Yoruba/Èdè Yorùbá"</option>
+                                </select>
+                            </div>
+                            <button id="toggle">Show underlying select</button>
+                        </li>-->
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <main role="main" class="pb-3 mt-3 pt-3">
+        <div class="container" style="background-color:rgba(255, 255, 255, 0.6); border-radius: 12px;">
             @RenderBody()
-        </main>
-    </div>
+            <br />
+        </div>
+    </main>
 
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - SpoilerBlockerFull - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>-->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!--<script>
+        var $jsSelectLanguage = $(".search-select#Language");
+        $jsSelectLanguage.select2({
+            minimumInputLength: 1,
+            placeholder: 'Languages',
+            ajax: {
+                url: 'https://api.themoviedb.org/3/configuration/languages',
+                data: function () {
+                    return {
+                        "api_key": "fdbd71ab8b2b768e59653d40c256f41f"
+                    };
+                },
+                processResults: function (data) {
+                    var data2 = $.map(data.results, function (obj) {
+                        obj.id = obj.iso_639_1;
+                        obj.text = obj.english_name;
+
+
+                        return obj;
+                    });
+
+                    return {
+                        results: data2
+                    }
+                },
+                delay: 1000,
+                width: 'resolve'
+            }
+        });
+        $jsSelectLanguage.on('select2:select', function (e) {
+            var data = e.params.data;
+            console.log(data);
+            //document.getElementById("Name").value = data.text;
+        });
+    </script>-->
     @RenderSection("Scripts", required: false)
 </body>
 </html>

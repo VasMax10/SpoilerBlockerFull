@@ -4,12 +4,53 @@
     ViewData["Title"] = "Index";
 }
 
+<link rel="stylesheet" href="~/css/BookFlipCards.css" />
+
+<style>
+    
+</style>
+<style media="screen">
+    
+    .mini-btn {
+        font-size: 20px;
+        margin: -30px 0px 0px 0px;
+        padding: 0px 10px 0px 10px;
+    }
+</style>
+
+
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-warning">Create New</a>
+    <a asp-action="ImportMovie" class="btn btn-warning">Import Movie From TMDB</a>
+    <a asp-action="ImportTV" class="btn btn-warning">Import TV-series From TMDB</a>
 </p>
-<table class="table">
+
+
+<div class="row mb-4 wow fadeIn justify-content-center">
+    @foreach (var item in Model)
+    {
+    <div class="card" style="margin-left:30px">
+        <div class="img-container">
+            <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2@(item.PosterPath)" alt="" />
+        </div>
+        <div class="card-details">
+        <div style="text-align:end">
+            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary mini-btn">Edit</a>
+            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mini-btn" style="margin-right:-15px">Delete</a>
+        </div>
+
+        <h2 style="margin-top:-30px">@item.Name</h2>
+        <br />
+        <div style="text-align: center; position:fixed; bottom:10px;">
+            <a asp-controller="Keywords" asp-action="Index" asp-route-categoryId="@item.Id" class="btn btn-info" style="width:145px">Characters</a>
+        </div>
+    </div>
+    </div>}
+</div>
+
+<!--<table class="table">
     <thead>
         <tr>
             <th>
@@ -22,20 +63,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-controller="Keywords" asp-action="Index" asp-route-categoryId="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Keywords" asp-action="Index" asp-route-categoryId="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
-</table>
+</table>-->

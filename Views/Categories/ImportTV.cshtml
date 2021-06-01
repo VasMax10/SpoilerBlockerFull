@@ -1,0 +1,111 @@
+﻿@model SpoilerBlockerFull.Models.Category
+
+@{
+    ViewData["Title"] = "Import From TMDB";
+}
+
+<head>
+    
+</head>
+
+<h1>Import TV From TMDb</h1>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ImportTV">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TMDbId" class="control-label"></label>
+                <br />
+                <select style="width: -webkit-fill-available;" class="search-select form-control" asp-for="TMDbId">
+                    <option selected disabled></option>
+                </select>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="CoverColor" type="hidden" class="form-control" />
+                <span asp-validation-for="CoverColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Name" class="form-control" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input asp-for="PosterPath" class="form-control" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input asp-for="BackdropPath" class="form-control" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input asp-for="Overview" class="form-control" type="hidden" />
+            </div>
+            <div class="form-group">
+                <p id="overviewText">
+
+                </p>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script>
+
+    var $jsSelectCategory = $(".search-select#TMDbId");
+    $jsSelectCategory.select2({
+        minimumInputLength: 3,
+        placeholder: 'Find on TMDb',
+        ajax: {
+            url: 'https://api.themoviedb.org/3/search/tv',
+            data: function (term) {
+                return {
+                    "query": JSON.stringify(term.term),
+                    "api_key": "fdbd71ab8b2b768e59653d40c256f41f",
+                    "language": "en-US",
+                    "page": 1,
+                    "include_adult": "false"
+                };
+            },
+            processResults: function (data) {
+                var data2 = $.map(data.results, function (obj) {
+                    obj.id = obj.id;
+                    if (obj.first_air_date != null) {
+                        obj.text = obj.name + " (" + obj.first_air_date.substring(0, 4) + ")";
+                    }
+                    else {
+                        obj.text = obj.name;
+                    }
+                    
+
+                    return obj;
+                });
+
+                return {
+                    results: data2
+                }
+            },
+            delay: 1000,
+            width: 'resolve'
+        }
+    });
+    $jsSelectCategory.on('select2:select', function (e) {
+        var data = e.params.data;
+        console.log(data);
+        document.getElementById("Name").value = data.text;
+        document.getElementById("PosterPath").value = data.poster_path;
+        document.getElementById("BackdropPath").value = data.backdrop_path;
+        document.getElementById("Overview").value = data.overview;
+        document.getElementById("overviewText").innerText = data.overview;
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

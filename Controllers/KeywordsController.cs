@@ -35,6 +35,8 @@ namespace SpoilerBlockerFull.Controllers
                 return NotFound();
             }
             ViewBag.categoryId = categoryId;
+            ViewBag.categoryName = _context.SpoilerCategories.Where(c => c.Id == categoryId).FirstOrDefault().Name;
+            ViewBag.backDrop = _context.SpoilerCategories.Where(c => c.Id == categoryId).FirstOrDefault().BackdropPath;
             return View(await result.ToListAsync());
         }
 

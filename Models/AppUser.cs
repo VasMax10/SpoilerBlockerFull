@@ -16,6 +16,7 @@ namespace SpoilerBlockerFull.Models
         public string SecondName { get; set; }
         public string NickName { get; set; }
         public string ProfilePictureUrl { get; set; }
+        public string Language { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
     }
 }
